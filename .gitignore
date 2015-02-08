@@ -1,1 +1,4 @@
 .idea/
+
+server/config-local.php
+server/vendor/

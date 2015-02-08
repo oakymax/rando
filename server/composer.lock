@@ -1,0 +1,53 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "fbf87d670580b9498fdcff92022b5816",
+    "packages": [
+        {
+            "name": "simplepdo/simplepdo",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bennettstone/SimplePDO.git",
+                "reference": "68b9c33e009ed8e687628370d7ae4d154fa1095f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bennettstone/SimplePDO/zipball/68b9c33e009ed8e687628370d7ae4d154fa1095f",
+                "reference": "68b9c33e009ed8e687628370d7ae4d154fa1095f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "SimplePDO.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Bennett Stone",
+                    "homepage": "http://phpdevtips.com"
+                }
+            ],
+            "description": "PHP PDO class designed to use prepared queries while providing support for existing implementations using SimpleMySQLi.",
+            "time": "2015-01-09 22:58:53"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "simplepdo/simplepdo": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
