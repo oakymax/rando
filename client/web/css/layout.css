@@ -1,0 +1,49 @@
+body {
+    margin: 0px;
+}
+
+.layout-wrapper {
+    margin-right: auto;
+    margin-left: auto;
+    width: 800px;
+}
+
+.header {
+    width: 100%;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 20px;
+    border-bottom: solid 1px #003366;
+}
+
+.header h1 {
+    margin: 0;
+    padding: 0px;
+}
+
+.footer {
+    width: 100%;
+    text-align: center;
+    border-top: dotted 1px #003366;
+}
+
+.footer span {
+    line-height: 50px;
+}
+
+.content {
+    min-height: 150px;
+}
+
+.content .toolbar {
+    padding: 20px 0 20px 10px;
+    border-bottom: dotted 1px #003366;
+}
+
+
+/*.content:after {
+    content: "";
+    display: table;
+    clear: both;
+}*/
+

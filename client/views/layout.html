@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>RANDOm photo exchange</title>
+
+        <link rel="stylesheet" type="text/css" href="/css/layout.css">
+        <link rel="stylesheet" type="text/css" href="/css/signin.css">
+        <link rel="stylesheet" type="text/css" href="/css/signup.css">
+    </head>
+    <body>
+        <div class="layout-wrapper">
+            <div class="header">
+                <h1>RANDOm photo exchange</h1>
+                <?php if (User::isAuthenticated()): ?>
+                    <a href="/auth/signout">exit</a>
+                <? endif; ?>
+            </div>
+            <div class="content">
+                <?php if (isset($templateName)): ?>
+                    <? include($templateName) ?>
+                <?php elseif (!User::isAuthenticated()): ?>
+                    <? include('signin.html') ?>
+                <? else: ?>
+                    <div class="toolbar">
+                        Send image to somebody
+                        <span>
+                            <input type="file"/>
+                        </span>
+                        <input type="submit" value="Send">
+                    </div>
+                    <div class="feed">
+                        <div class="incoming"></div>
+                        <div class="outgoing"></div>
+                    </div>
+                <? endif; ?>
+            </div>
+            <div class="footer"><span>© 2015 Maxim Korshunov</span></div>
+        </div>
+    </body>
+</html>
