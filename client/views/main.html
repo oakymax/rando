@@ -1,0 +1,22 @@
+<div class="toolbar">
+    <?php include('send-photo.html') ?>
+</div>
+<div class="feed">
+    <div class="incoming">
+
+        <h2>Incoming feed</h2>
+
+        <?php foreach($data['incomingPhotos'] as $photo): ?>
+            <?php echo("<img class='photo' src='".$data['server']."photos/".$photo->storage_identifier.".jpg' />") ?>
+        <?php endforeach; ?>
+    </div>
+
+    <div class="outgoing">
+
+        <h2>Outgoing feed</h2>
+
+        <?php foreach($data['outgoingPhotos'] as $photo): ?>
+        <?php echo("<img class='photo' src='".$data['server']."photos/".$photo->storage_identifier.".jpg' />") ?>
+        <?php endforeach; ?>
+    </div>
+</div>

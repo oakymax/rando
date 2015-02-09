@@ -1,4 +1,8 @@
 .idea/
 
 server/config-local.php
+client/config-local.php
+
 server/vendor/
+
+server/web/photos/*

@@ -2,16 +2,17 @@
 
 class user {
 
-    public function actionGet(){
-        $username = isset($_POST['username']) ? $_POST['username'] : '-';
+    public function actionGet($key = null){
 
-        $user = SimplePDO::getInstance()->get_row('SELECT id, username FROM user WHERE username = ?', [$username]);
-
-        if ( !$user || $user->id != Auth::user() ){
-            throw new Exception('authentication failed');
+        if (is_null($key)){
+            throw new BadRequestException("index method for user entity is not implemented");
         }
 
-        die(json_encode($user));
+        if ( Auth::username() != $key ){
+            throw new ForbiddenException("authorizaion failed");
+        }
+
+        die(json_encode([]));
     }
 
     public function actionPost(){
@@ -19,27 +20,29 @@ class user {
         $password = isset($_POST['password']) ? $_POST['password'] : null;
 
         if(!$username || !$password) {
-            throw new Exception('username and password should not be empty');
+            throw new BadRequestException('username and password should not be empty');
         }
 
         if (!filter_var($username, FILTER_VALIDATE_EMAIL) ){
-            throw new Exception('username should be an valid email');
+            throw new BadRequestException('username should be an valid email');
         }
 
         $passwordRegexp = '/^[a-z0-9_-]{3,18}$/';
         if (!preg_match($passwordRegexp, $password) ){
-            throw new Exception("password should match {$passwordRegexp}");
+            throw new BadRequestException("password should match {$passwordRegexp}");
         }
 
-        $user = SimplePDO::getInstance()->get_row('SELECT FROM user WHERE username = ?', [$username]);
+        $user = SimplePDO::getInstance()->get_row("SELECT * FROM user WHERE username = ?", array($username));
 
         if ($user) {
-            throw new Exception("this username is already taken");
+            throw new ConflictException("this username is already taken");
         }
 
         $newUserId = SimplePDO::getInstance()->insert('user', [
             'username' => $username,
             'password_md5' => md5($password)
         ]);
+
+        die(json_encode(['id' => $newUserId]));
     }
 }

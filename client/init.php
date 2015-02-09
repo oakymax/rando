@@ -8,4 +8,4 @@ if (file_exists('../config-local.php')) {
     $config = array_merge($config, include('config-local.php'));
 }
 
-Server::getInstance($config['server']);
+RANDOServer::getInstance($config['server']);

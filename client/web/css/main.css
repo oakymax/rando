@@ -1,0 +1,19 @@
+.incoming {
+    width: 398px;
+    float: left;
+    min-height: 200px;
+    text-align: center;
+    padding: 10px 0 10px 0;
+}
+
+.outgoing {
+    width: 398px;
+    min-height: 200px;
+    float: left;
+    padding: 10px 0px 10px 0px;
+    text-align: center;
+}
+
+.photo {
+    width: 378px;
+}

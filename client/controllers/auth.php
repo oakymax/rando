@@ -1,21 +1,18 @@
 <?php
 
-class auth {
+class AuthController {
     public function actionSignIn(){
-
-        if (User::isAuthenticated()){
-            header("Location: /");
-            die();
-        }
 
         if ( $_SERVER["REQUEST_METHOD"] == 'POST' ) {
             $name = isset($_REQUEST["username"]) ? $_REQUEST["username"] : "";
             $password = isset($_REQUEST["password"]) ? $_REQUEST["password"] : "";
 
-            if ( User::signIn($name, $password) ) {
-                header("Location: /");
-                die();
-            }
+            User::signIn($name, $password);
+        }
+
+        if (User::isAuthenticated()){
+            header("Location: /");
+            die();
         }
 
         render_page('signin.html');
@@ -29,19 +26,19 @@ class auth {
     }
 
     public function actionSignUp(){
-        if (User::isAuthenticated()){
-            header("Location: /");
-            die();
-        }
-
         if ( $_SERVER["REQUEST_METHOD"] == 'POST' ) {
             $name = isset($_REQUEST["username"]) ? $_REQUEST["username"] : "";
             $password = isset($_REQUEST["password"]) ? $_REQUEST["password"] : "";
+            $password_confirm = isset($_REQUEST["password-confirm"]) ? $_REQUEST["password-confirm"] : "-";
 
-            if ( User::signUp($name, $password) ) {
-                header("Location: /");
-                die();
+            if ($password_confirm == $password) {
+                User::signUp($name, $password);
             }
+        }
+
+        if (User::isAuthenticated()){
+            header("Location: /");
+            die();
         }
 
         render_page('signup.html');

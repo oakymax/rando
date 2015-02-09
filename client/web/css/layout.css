@@ -40,10 +40,9 @@ body {
     border-bottom: dotted 1px #003366;
 }
 
-
-/*.content:after {
+.content:after {
     content: "";
     display: table;
     clear: both;
-}*/
+}
 

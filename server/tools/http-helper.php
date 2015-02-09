@@ -1,5 +1,35 @@
 <?php
 
+class RandoHTTPException extends Exception {
+    public function httpCode() {
+        return "400";
+    }
+}
+
+class BadRequestException extends Exception {
+    public function httpCode() {
+        return "400";
+    }
+}
+
+class UnauthorizedException extends Exception {
+    public function httpCode() {
+        return "401";
+    }
+}
+
+class ForbiddenException extends Exception {
+    public function httpCode() {
+        return "403";
+    }
+}
+
+class ConflictException extends Exception {
+    public function httpCode() {
+        return "409";
+    }
+}
+
 function header_status($statusCode) {
     static $status_codes = null;
 

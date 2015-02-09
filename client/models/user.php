@@ -14,30 +14,43 @@ class User {
         return $_SESSION['username'];
     }
 
+    private static function setCredentials($username, $password){
+        $_SESSION['username'] = $username;
+        $_SESSION['password_md5'] = md5($password);
+    }
+
+    private static function clearCredentials(){
+        unset($_SESSION["username"]);
+        unset($_SESSION["password_md5"]);
+    }
+
     public static function getPasswordMd5(){
         return $_SESSION['password_md5'];
     }
 
     public static function signOut(){
-        unset($_SESSION["username"]);
-        unset($_SESSION["password_md5"]);
+        self::clearCredentials();
     }
 
     public static function signIn($username, $password){
+        self::setCredentials($username, $password);
 
-        $response = Server::getInstance()->get([
-            'username' => $username,
-            'password' => $password
-        ]);
+        $response = RANDOServer::getInstance()->get("user", $username);
 
-        $_SESSION["username"] = $username;
-        $_SESSION["password_md5"] = md5($password);
-        return true;
+        if (!$response->success()){
+            self::clearCredentials();
+        }
     }
 
     public static function signUp($username, $password){
-        $_SESSION["username"] = $username;
-        self::signIn($username, $password);
-        return true;
+        $response = RANDOServer::getInstance()->post("user", null, [
+            "username" => $username,
+            "password" => $password
+        ]);
+
+        if ($response->success()) {
+            self::setCredentials($username, $password);
+        }
     }
+
 }
