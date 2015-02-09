@@ -6,3 +6,5 @@ client/config-local.php
 server/vendor/
 
 server/web/photos/*
+
+log
