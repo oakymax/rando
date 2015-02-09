@@ -4,7 +4,7 @@ define("__ROOT__", realpath(__DIR__ . "/.."));
 
 try {
 
-    include(__ROOT____.'/init.php');
+    include(__ROOT__.'/init.php');
 
     $router = new Router();
     $router->execute();
