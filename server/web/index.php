@@ -14,13 +14,16 @@ try {
     /* handle application exceptions
      * to provide correct response header */
     header_status( $e->httpCode() );
-    die(json_encode(['message' => $e->getMessage()]));
+    respond([
+        'message' => $e->getMessage()
+    ]);
 
 } catch(Exception $e) {
 
     /* handle other exceptions */
     header_status( "500" );
-    die(json_encode(['message' => $e->getMessage()]));
-
+    respond([
+        'message' => $e->getMessage()
+    ]);
 }
 

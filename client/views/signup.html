@@ -1,7 +1,9 @@
 <form class="signup" action="/auth/signup" method="post">
     <div class="control">
         Username (email): <br/>
-        <input type="text" placeholder="example@domain.com" name="username"/>
+        <?php
+            echo "<input type='text' placeholder='example@domain.com' name='username' value='".$data['username']."'/>"
+        ?>
     </div>
     <div class="control">
         Password: <br/>
@@ -9,9 +11,12 @@
     </div>
     <div class="control">
         Repeat password: <br/>
-        <input type="password" name="password-confirm"/>
+        <input type="password" name="password_confirm"/>
     </div>
     <div class="control">
-        <input type="submit" value="Sign up"> or <a href="/auth/signin">sign in</a>
+        <input type="submit" value="Sign up"> or <a href="/auth">sign in</a>
+    </div>
+    <div class="control">
+        <?= get_val($data, 'message') ?>
     </div>
 </form>

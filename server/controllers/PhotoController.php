@@ -1,7 +1,7 @@
 <?php
 
 class PhotoController {
-    function actionGet(){
+    function actionIndex(){
         if (!Auth::username()){
             throw new ForbiddenException('photo listing allowed only for authenticated users');
         }
@@ -31,7 +31,7 @@ class PhotoController {
                 break;
         }
 
-        die(json_encode($rows));
+        respond($rows);
     }
 
     function actionPost()
@@ -52,7 +52,9 @@ class PhotoController {
                 'sender' => Auth::userid()
             ]);
 
-            die(json_encode(["storage_identifier" => $storage_identifier]));
+            respond([
+                "storage_identifier" => $storage_identifier
+            ]);
 
         } else {
             throw new BadRequestException('bad image format or no image uploaded');

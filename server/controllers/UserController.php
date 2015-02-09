@@ -2,22 +2,21 @@
 
 class UserController {
 
-    public function actionGet($key = null){
+    public function actionIndex(){
 
-        if (is_null($key)){
-            throw new BadRequestException("index method for user entity is not implemented");
-        }
+    }
 
+    public function actionGet($key){
         if ( Auth::username() != $key ){
             throw new ForbiddenException("authorizaion failed");
         }
 
-        die(json_encode([]));
+        respond([]);
     }
 
     public function actionPost(){
-        $username = isset($_POST['username']) ? $_POST['username'] : null;
-        $password = isset($_POST['password']) ? $_POST['password'] : null;
+        $username = get_val($_POST, 'username');
+        $password = get_val($_POST, 'password');
 
         if(!$username || !$password) {
             throw new BadRequestException('username and password should not be empty');
@@ -43,6 +42,8 @@ class UserController {
             'password_md5' => md5($password)
         ]);
 
-        die(json_encode(['id' => $newUserId]));
+        respond([
+            'id' => $newUserId
+        ]);
     }
 }

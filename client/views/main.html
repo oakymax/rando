@@ -1,22 +1,35 @@
 <div class="toolbar">
-    <?php include('send-photo.html') ?>
+    <form action="/photo/send" method="post" enctype="multipart/form-data">
+        Send photo to somebody
+    <span>
+        <input type="file" name="photo"/>
+    </span>
+        <input type="submit" value="Send">
+    </form>
 </div>
 <div class="feed">
     <div class="incoming">
 
         <h2>Incoming feed</h2>
-
+        <?php if($data['incomingPhotos']): ?>
         <?php foreach($data['incomingPhotos'] as $photo): ?>
             <?php echo("<img class='photo' src='".$data['server']."photos/".$photo->storage_identifier.".jpg' />") ?>
         <?php endforeach; ?>
+        <?php else: ?>
+            Empty
+        <?php endif; ?>
     </div>
 
     <div class="outgoing">
 
         <h2>Outgoing feed</h2>
 
+        <?php if($data['outgoingPhotos']): ?>
         <?php foreach($data['outgoingPhotos'] as $photo): ?>
         <?php echo("<img class='photo' src='".$data['server']."photos/".$photo->storage_identifier.".jpg' />") ?>
         <?php endforeach; ?>
+        <?php else: ?>
+        Empty
+        <?php endif; ?>
     </div>
 </div>
