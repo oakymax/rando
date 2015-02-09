@@ -2,7 +2,7 @@
 
 session_start();
 
-include('../includes.php');
+include('../init.php');
 
 function render_page($templateName = null){
     include('../views/layout.html');
