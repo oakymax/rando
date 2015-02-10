@@ -14,6 +14,8 @@ require_once(__ROOT__.'/controllers/MainController.php');
 require_once(__ROOT__.'/controllers/PhotoController.php');
 require_once(__ROOT__.'/controllers/UserController.php');
 
+date_default_timezone_set('Asia/Yekaterinburg');
+
 $config = require(__ROOT__.'/config.php');
 if (file_exists(__ROOT__.'/config-local.php')) {
     $config = array_merge($config, include(__ROOT__.'/config-local.php'));
