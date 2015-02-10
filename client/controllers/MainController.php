@@ -13,7 +13,6 @@ class MainController {
                     "filter" => "outgoing"
                 ])->body()
             ];
-
             render('main', $data);
         } else {
             header("Location: /auth");

@@ -3,15 +3,21 @@
 class UserController {
 
     public function actionIndex(){
-
+        if ( $me = User::me() ){
+            respond($me);
+        } else {
+            throw new ForbiddenException("authorizaion failed");
+        }
     }
 
     public function actionGet($key){
-        if ( Auth::username() != $key ){
+        $me = User::me();
+        $user = User::get($key);
+        if ( $me && $user && $me->getId() == User::get($key)->getId() ){
+            respond($me);
+        } else {
             throw new ForbiddenException("authorizaion failed");
         }
-
-        respond([]);
     }
 
     public function actionPost(){
@@ -31,19 +37,15 @@ class UserController {
             throw new BadRequestException("password should match {$passwordRegexp}");
         }
 
-        $user = SimplePDO::getInstance()->get_row("SELECT * FROM user WHERE username = ?", array($username));
-
-        if ($user) {
+        if (User::usernameOccupied($username)) {
             throw new ConflictException("this username is already taken");
         }
 
-        $newUserId = SimplePDO::getInstance()->insert('user', [
-            'username' => $username,
-            'password_md5' => md5($password)
-        ]);
+        $user = new User();
+        $user->username = $username;
+        $user->setPassword($password);
+        $user->save();
 
-        respond([
-            'id' => $newUserId
-        ]);
+        respond($user);
     }
 }
