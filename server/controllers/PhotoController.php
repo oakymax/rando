@@ -29,6 +29,7 @@ class PhotoController {
 
         if (isset($_FILES["photo"]) && file_exists($_FILES["photo"]["tmp_name"])) {
             $photo = Photo::upload($_FILES["photo"]["tmp_name"]);
+            Rando::sendPhotoToRandomUser($photo);
             respond($photo);
         } else {
             throw new BadRequestException('no image uploaded');

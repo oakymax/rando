@@ -20,4 +20,19 @@ class Rando {
         ]);
 
     }
+
+    public static function sendPhotoToRandomUser(Photo &$photo){
+        if (!$photo->getRecipient()) {
+            $row = SimplePDO::getInstance()->get_row(
+                "SELECT id FROM user WHERE NOT id = ? ORDER BY RAND() LIMIT 0,1",
+                [$photo->getSender()->getId()]);
+
+            if ($row) {
+                $photo->setRecipient(User::get($row->id));
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

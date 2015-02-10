@@ -95,6 +95,11 @@ class Photo implements JsonSerializable {
         }
     }
 
+    public function setRecipient(User $user){
+        $this->recipient_id = $user->getId();
+        $this->save();
+    }
+
     public function getUri(){
         return 'http://' . $_SERVER['SERVER_NAME'] . '/photos/' . $this->storage_identifier . '.jpg';
     }
@@ -114,7 +119,7 @@ class Photo implements JsonSerializable {
                 $image->sender_id = $me->getId();
                 $image->save();
 
-                respond($image);
+                return $image;
             } else {
                 throw new BadRequestException('bad image format');
             }
