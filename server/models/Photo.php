@@ -112,7 +112,7 @@ class Photo implements JsonSerializable {
 
                 $storage_identifier = md5((new DateTime())->format('Y-m-d H:i:s u') . rand(0, 1000));
 
-                $imagick->writeImage(__ROOT__."/web/photos/{$storage_identifier}.jpg");
+                $imagick->writeImage(__ROOT__."/www/photos/{$storage_identifier}.jpg");
 
                 $image = new self();
                 $image->storage_identifier = $storage_identifier;
