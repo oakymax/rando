@@ -22,7 +22,8 @@ class RANDOServerResponse {
     }
 
     public function __construct($curl){
-        $this->body = json_decode(curl_exec($curl));
+        $response = curl_exec($curl);
+        $this->body = json_decode($response);
         $this->httpCode = intval(curl_getinfo($curl, CURLINFO_HTTP_CODE));
         $this->success = $this->httpCode < 400;
     }

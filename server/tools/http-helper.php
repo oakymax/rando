@@ -6,25 +6,25 @@ class RandoHTTPException extends Exception {
     }
 }
 
-class BadRequestException extends Exception {
+class BadRequestException extends RandoHTTPException {
     public function httpCode() {
         return "400";
     }
 }
 
-class UnauthorizedException extends Exception {
+class UnauthorizedException extends RandoHTTPException {
     public function httpCode() {
         return "401";
     }
 }
 
-class ForbiddenException extends Exception {
+class ForbiddenException extends RandoHTTPException {
     public function httpCode() {
         return "403";
     }
 }
 
-class ConflictException extends Exception {
+class ConflictException extends RandoHTTPException {
     public function httpCode() {
         return "409";
     }
